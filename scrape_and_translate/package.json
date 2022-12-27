@@ -1,0 +1,24 @@
+{
+  "type": "module",
+  "name": "scrape_and_translate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -L index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "@vitalets/google-translate-api": "^9.0.0",
+    "axios": "^1.2.1",
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "http-proxy-agent": "^5.0.0",
+    "json2csv": "^5.0.7"
+  }
+}

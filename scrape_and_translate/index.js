@@ -53,7 +53,7 @@ async function translateWithProxies(){
     let proxies = await getProxyList();
     
     for (let i = 1; i < proxies.length; i++) {
-        console.log("loopin" + i);
+        console.log("test: " + i);
         const ip = proxies[i][0];
         const port = proxies[i][1];
         console.log(`http://${ip}:${port}`);

@@ -1,12 +1,12 @@
 import cheerio from 'cheerio';
-import axios from'axios';
+import axios from 'axios';
 
-import express from'express'
+import express from 'express'
 const app = express();
 
 import { translate } from '@vitalets/google-translate-api';
 
-import createHttpProxyAgent from'http-proxy-agent';
+import createHttpProxyAgent from 'http-proxy-agent';
 
 
 // Scraping proxies list

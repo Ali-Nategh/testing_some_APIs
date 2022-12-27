@@ -46,7 +46,8 @@ var stack = new Error().stack
 console.log( stack )
 or more simply:
 
-console.trace("Here I am!")`
+console.trace("Here I am!")
+`
 let translated_texts = [];
 
 async function translateWithProxies(){
@@ -59,9 +60,9 @@ async function translateWithProxies(){
         console.log(`http://${ip}:${port}`);
         let agent = await createHttpProxyAgent(`http://${ip}:${port}`);
 
+        // some delay to fix errors?
         // const delay = ms => new Promise( res => setTimeout(res, ms));
         // await delay(1500)
-        
         
 
         try {
@@ -87,6 +88,7 @@ async function translateWithProxies(){
 translateWithProxies()
 
 
+// To see translated content on localhost:5000
 app.get('/', function(req, res) {
     res.send(`${translated_texts}`);
 });

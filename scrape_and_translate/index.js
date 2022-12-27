@@ -9,7 +9,7 @@ import { translate } from '@vitalets/google-translate-api';
 import createHttpProxyAgent from'http-proxy-agent';
 
 
-
+// Scraping proxies list
 const url = "https://free-proxy-list.net/"
 async function getProxyList(){
     let proxies = [];
@@ -25,9 +25,10 @@ async function getProxyList(){
             row.each(function(){
                 proxy_info.push($(this).text());
             })
-            proxies.push(proxy_info);
-            // if (proxy_info[4] == 'anonymous') {
-            // }
+            // only using anonymous ones
+            if (proxy_info[4] == 'anonymous') {
+                proxies.push(proxy_info);
+            }
         });
         return(proxies);
     } 
@@ -38,7 +39,7 @@ async function getProxyList(){
 }
 
 
-let translate_now = `
+let translate_text = `
 Any Error object has a stack member that traps the point at which it was constructed.
         
 var stack = new Error().stack
@@ -46,7 +47,7 @@ console.log( stack )
 or more simply:
 
 console.trace("Here I am!")`
-let translated_text = [];
+let translated_texts = [];
 
 async function translateWithProxies(){
     let proxies = await getProxyList();
@@ -58,20 +59,20 @@ async function translateWithProxies(){
         console.log(`http://${ip}:${port}`);
         let agent = await createHttpProxyAgent(`http://${ip}:${port}`);
 
-        const delay = ms => new Promise( res => setTimeout(res, ms));
+        // const delay = ms => new Promise( res => setTimeout(res, ms));
         // await delay(1500)
         
         
 
         try {
-            let text = await translate(`${translate_now}`,{
+            let text = await translate(`${translate_text}`,{
                 from: 'en',
                 to: 'fa',
                 fetchOptions: { agent },
                 // forceBatch: false
             });
             text = text.text
-            translated_text.push(text);
+            translated_texts.push(text);
             console.log(text);
         } catch (e) {
             console.log(e);
@@ -87,7 +88,7 @@ translateWithProxies()
 
 
 app.get('/', function(req, res) {
-    res.send(`${translated_text}`);
+    res.send(`${translated_texts}`);
 });
 
 
